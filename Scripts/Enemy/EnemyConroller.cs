@@ -9,7 +9,7 @@ public enum EnemyType
 }
 public class EnemyConroller : MonoBehaviour,IDamageable
 {
-    private EnemyType type;
+    public EnemyType type;
     private ObjectPool pool;
     private ShipController player;
     private Rigidbody2D rb;
@@ -23,17 +23,16 @@ public class EnemyConroller : MonoBehaviour,IDamageable
     {
         SetStats();
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = Vector2.down * 10f;  
+        rb.velocity = Vector2.down * 10f;
+        if (type == EnemyType.Fighter)
+        {
+            Invoke(nameof(ShootBullet), 2f);
+        }
     }
     void Start()
     {
         player = ShipController.Instance;
         pool = ObjectPool.Instance;
-
-        if (type == EnemyType.Fighter)
-        {
-            Invoke(nameof(ShootBullet), 2f);
-        }
     }
     private void SetStats() 
     {
@@ -75,7 +74,7 @@ public class EnemyConroller : MonoBehaviour,IDamageable
                 impact.transform.rotation = Quaternion.identity;
                 impact.SetActive(true);
             }
-            StartCoroutine(InActiveObject(impact,0.09f));
+            StartCoroutine(InActiveObject(impact,0.07f));
             UpdateHealth();
         }
         if(collision.gameObject.tag == "Boundary")
@@ -103,7 +102,11 @@ public class EnemyConroller : MonoBehaviour,IDamageable
                 effect.transform.rotation = Quaternion.identity;
                 effect.SetActive(true);
             }
-            StartCoroutine(InActiveObject(effect, 0.03f));
+            StartCoroutine(InActiveObject(effect, 0.02f));
         }
+    }
+    private void OnDisable()
+    {
+        CancelInvoke();
     }
 }

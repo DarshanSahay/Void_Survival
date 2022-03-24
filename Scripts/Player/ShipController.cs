@@ -28,6 +28,7 @@ public class ShipController : GenericSingleton<ShipController>
         Movement();
         if (canShoot)
         {
+            fireRate -= Time.deltaTime;
             Shoot();
         }
     }
@@ -47,7 +48,6 @@ public class ShipController : GenericSingleton<ShipController>
     }
     public void Shoot()
     {
-        fireRate -= Time.deltaTime;
         if (fireRate <= 0)
         {
             GameObject bullet1 = pool.GetPooledObject("PlayerBullet");

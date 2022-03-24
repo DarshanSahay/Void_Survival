@@ -14,13 +14,14 @@ public class ScoreManager : GenericSingleton<ScoreManager>
 
     private void Start()
     {
-        GameManager.Instance.onGameStarts += OnGameStarts;
+        GameManager.Instance.onGameStarted += OnGameStarts;
     }
-    private void OnGameStarts()
+    public void OnGameStarts()
     {
         currentScore = 0;
         onHitPoints = 5;
         powerUpTime = 20f;
+        UpdateScore();
     }
     private void Update()
     {

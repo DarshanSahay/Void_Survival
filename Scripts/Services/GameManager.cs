@@ -19,11 +19,11 @@ public class GameManager : GenericSingleton<GameManager>
     public ShipHealth health;
     public GameObject enemySpawner;
 
-    public event Action onGameStarts = delegate { };
-    private event Action onGameRunning = delegate { };
-    private event Action onGamePaused; //= delegate { };
-    private event Action onGameReseted;// = delegate { };
-    private event Action onGameEnded;// = delegate { };
+    public event Action onGameStarted;
+    private event Action onGameRunning;
+    private event Action onGamePaused;
+    private event Action onGameReseted;
+    private event Action onGameEnded;
     
     private void Awake()
     {
@@ -44,10 +44,10 @@ public class GameManager : GenericSingleton<GameManager>
     }
     private void InitialiseEvents()
     {
-        onGameStarts += ui.OpenMainMenuScreen;
-        onGameStarts += ui.OnGameStarted;
-        onGameStarts += ui.ClosePauseScreen;
-        onGameStarts += ui.CloseGameOverScreen;
+        onGameStarted += ui.OpenMainMenuScreen;
+        onGameStarted += ui.OnGameStarted;
+        onGameStarted += ui.ClosePauseScreen;
+        onGameStarted += ui.CloseGameOverScreen;
 
         onGameRunning += ui.CloseMainMenuScreen;
         onGameRunning += health.SetHealth;
@@ -58,6 +58,7 @@ public class GameManager : GenericSingleton<GameManager>
 
         onGameReseted += health.SetHealth;
         onGameReseted += ui.CloseGameOverScreen;
+        onGameReseted += _sManager.OnGameStarts;
 
         onGameEnded += _sManager.OnGameEnd;
         onGameEnded += ui.OpenGameOverScreen;
@@ -73,7 +74,7 @@ public class GameManager : GenericSingleton<GameManager>
         switch (state)
         {
             case GameStates.GameStarted:
-                onGameStarts?.Invoke();
+                onGameStarted?.Invoke();
                 enemySpawner.gameObject.SetActive(false);
                 break;
 

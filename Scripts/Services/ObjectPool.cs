@@ -56,6 +56,7 @@ public class ObjectPool : GenericSingleton<ObjectPool>
             if (item.activeInHierarchy)
             {
                 item.gameObject.SetActive(false);
+                item.transform.position = Vector2.zero;
             }
         }
     }
