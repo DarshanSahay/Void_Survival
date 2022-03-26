@@ -151,14 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  player: {fileID: 0}
-  rb: {fileID: 1193519000919693601}
-  bulletPrefab: {fileID: 0}
-  impactParticle: {fileID: 6289167421161017080, guid: ed643985b856bb24392e887bbc72f9c0, type: 3}
-  detroyParticle: {fileID: 1065430155300134009, guid: b198946484f5fa0499deea2cfa3a4042, type: 3}
+  col: {fileID: 1193519000919693600}
   shootPoint: {fileID: 0}
-  currentHealth: 0
-  maxHealth: 0
   healthBar: {fileID: 5902990369620162773}
 --- !u!1 &1877102428673775265
 GameObject:

@@ -207,10 +207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b60dd0c88780df44b90f194751db512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireRate: 0
+  canShoot: 0
   rb: {fileID: 1529005948599861323}
   joyStick: {fileID: 0}
-  bulletPrefab: {fileID: 3164843742419070522, guid: 7bafea89e070ad74795ffe46082e72a8, type: 3}
-  fireRate: 0
   shootPoint1: {fileID: 578401801}
   shootPoint2: {fileID: 1847341723}
 --- !u!114 &1235858662
@@ -225,6 +225,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416927c44f47e53469594452ee7e4e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currerntHealth: 0
-  maxHealth: 0
-  healthBar: {fileID: 0}

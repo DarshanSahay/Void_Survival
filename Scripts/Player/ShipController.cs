@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using UnityEngine.EventSystems;
 
 public class ShipController : GenericSingleton<ShipController>
 {
@@ -40,13 +38,13 @@ public class ShipController : GenericSingleton<ShipController>
     {
         canShoot = false;
     }
-    private void Movement()
+    private void Movement()                  //for sideways movement of ship
     {
         horizontal = joyStick.Horizontal;
         Vector2 movement = transform.right * moveSpeed * Time.deltaTime;
         rb.MovePosition(rb.position + movement * horizontal);
     }
-    public void Shoot()
+    public void Shoot()                                //function being called from UI button
     {
         if (fireRate <= 0)
         {

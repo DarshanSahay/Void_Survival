@@ -13,6 +13,7 @@ public class EnemyConroller : MonoBehaviour,IDamageable
     private ObjectPool pool;
     private ShipController player;
     private Rigidbody2D rb;
+    [SerializeField] private PolygonCollider2D col;
     private int currentHealth;
     private int maxHealth;
 
@@ -39,6 +40,7 @@ public class EnemyConroller : MonoBehaviour,IDamageable
         maxHealth = 100;
         currentHealth = maxHealth;
         healthBar.fillAmount = currentHealth / maxHealth;
+        col.isTrigger = true;
     }
     private void ShootBullet()
     {
@@ -59,7 +61,7 @@ public class EnemyConroller : MonoBehaviour,IDamageable
     {
         currentHealth -= damage;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)        //after colliding with player bullet , take damage and activate impact effect
     {
         if(collision.gameObject.tag == "PlayerBullet")
         {
@@ -87,11 +89,12 @@ public class EnemyConroller : MonoBehaviour,IDamageable
         yield return new WaitForSeconds(time);
         obj.gameObject.SetActive(false);
     }
-    private void UpdateHealth()
+    private void UpdateHealth()                                             //update health when taken damage and activate destroyed effect on health is zero
     {
         healthBar.fillAmount = (float)currentHealth / maxHealth;
         if(currentHealth <= 0)
         {
+            col.isTrigger = false;
             rb.position = transform.position;
             ScoreManager.Instance.AddScore();
             StartCoroutine(InActiveObject(gameObject, 0.1f));

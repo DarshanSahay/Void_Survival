@@ -4,29 +4,21 @@ using UnityEngine;
 
 public class Parallax_BackGround : MonoBehaviour
 {
-    private float length, startPos;
-    public GameObject cam;
-    public float parallaxEffect;
+    public Material bgMat;
+    public MeshRenderer _mRenderer;
+    Vector2 matOffset;
 
     private void Start()
     {
-        startPos = transform.position.y;
-        length = GetComponent<SpriteRenderer>().bounds.size.y;
+        _mRenderer = GetComponent<MeshRenderer>();
+        bgMat = _mRenderer.material;
+        matOffset = bgMat.mainTextureOffset;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        float temp = (cam.transform.position.y * (1 - parallaxEffect));
-        float distance = (cam.transform.position.y * parallaxEffect);
-
-        transform.position = new Vector3(transform.position.x, startPos + distance, transform.position.z);
-        if(temp > startPos + length)
-        {
-            startPos += length;
-        }else if(temp < startPos - length)
-        {
-            startPos -= length;
-        }
+        matOffset.y += Time.deltaTime / 10f;
+        bgMat.mainTextureOffset = matOffset;
     }
 }

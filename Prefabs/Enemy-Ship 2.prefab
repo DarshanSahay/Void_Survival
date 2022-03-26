@@ -357,12 +357,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  player: {fileID: 0}
-  rb: {fileID: 7962501911036387390}
-  bulletPrefab: {fileID: 1863401468161901012, guid: 1250cfb6d3053774384954d165cc8777, type: 3}
-  impactParticle: {fileID: 6289167421161017080, guid: ed643985b856bb24392e887bbc72f9c0, type: 3}
-  detroyParticle: {fileID: 1065430155300134009, guid: b198946484f5fa0499deea2cfa3a4042, type: 3}
+  col: {fileID: 7962501911036387391}
   shootPoint: {fileID: 7057657214393708934}
-  currentHealth: 0
-  maxHealth: 0
   healthBar: {fileID: 2901277117777194073}

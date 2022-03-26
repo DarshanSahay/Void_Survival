@@ -15,7 +15,7 @@ public class ObjectPool : GenericSingleton<ObjectPool>
     public List<GameObject> pooledObjects = new List<GameObject>();
     private void Start()
     {
-        foreach (ItemsToPool item in pooledItems)
+        foreach (ItemsToPool item in pooledItems)                            //Get the items from all types of pools and add them in the list and disable them
         {
             for (int i = 0; i < item.amountToPool; i++)
             {
@@ -25,7 +25,7 @@ public class ObjectPool : GenericSingleton<ObjectPool>
             }
         }
     }
-    public GameObject GetPooledObject(string tag)
+    public GameObject GetPooledObject(string tag)                          //get the required gameobject from the pool by using tag
     {
         for (int i = 0; i < pooledObjects.Count; i++)
         {
@@ -34,7 +34,7 @@ public class ObjectPool : GenericSingleton<ObjectPool>
                 return pooledObjects[i];
             }
         }
-        foreach (ItemsToPool item in pooledItems)
+        foreach (ItemsToPool item in pooledItems)                           //if the objects are less in the pool , increase objects
         {
             if (item.objectPrefab.tag == tag)
             {
@@ -49,7 +49,7 @@ public class ObjectPool : GenericSingleton<ObjectPool>
         }
         return null;
     }
-    public void DeActivateAll()
+    public void DeActivateAll()                                          //de activates all the objects
     {
         foreach (GameObject item in pooledObjects)
         {

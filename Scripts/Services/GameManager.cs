@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum GameStates
+public enum GameStates                      // enum to keep track of game state
 {
     GameStarted,
     GameRunning,
@@ -17,9 +17,8 @@ public class GameManager : GenericSingleton<GameManager>
     private UIManager ui;
     private ScoreManager _sManager;
     public ShipHealth health;
-    public GameObject enemySpawner;
-
-    public event Action onGameStarted;
+    
+    public event Action onGameStarted;                              //events related to game states
     private event Action onGameRunning;
     private event Action onGamePaused;
     private event Action onGameReseted;
@@ -42,7 +41,7 @@ public class GameManager : GenericSingleton<GameManager>
             SetGameState(GameStates.GamePaused);
         }
     }
-    private void InitialiseEvents()
+    private void InitialiseEvents()                                             //Subscribing all events according to the state
     {
         onGameStarted += ui.OpenMainMenuScreen;
         onGameStarted += ui.OnGameStarted;
@@ -64,24 +63,22 @@ public class GameManager : GenericSingleton<GameManager>
         onGameEnded += ui.OpenGameOverScreen;
         onGameEnded += ui.ClosePauseScreen;
     }
-    public void SetGameState(GameStates State)
+    public void SetGameState(GameStates State)                         //function to set state of game
     {
         state = State;
         UpdateGameState();
     }
-    private void UpdateGameState()
+    private void UpdateGameState()                                      //function to update the game state and invoke the events related to it
     {
         switch (state)
         {
             case GameStates.GameStarted:
                 onGameStarted?.Invoke();
-                enemySpawner.gameObject.SetActive(false);
                 break;
 
             case GameStates.GameRunning:
                 Time.timeScale = 1;
                 onGameRunning?.Invoke();
-                enemySpawner.gameObject.SetActive(true);
                 break;
 
             case GameStates.GamePaused:

@@ -12,15 +12,15 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject[] asteroid;
     void OnEnable()
     {
-        minX = -7f;  minY = -2f;
-        maxX =  7f;  maxY =  2f;
+        minX = -6f;  minY = -2f;
+        maxX =  6f;  maxY =  2f;
         pool = ObjectPool.Instance;
 
         Invoke(nameof(SpawnEnemies), 2f);
         Invoke(nameof(SpawnAsteroid), 5f);
         Invoke(nameof(SpawnPowerUp), 30f);
     }
-    private Vector3 GetRandomLocation()
+    private Vector3 GetRandomLocation()                                       //get random loaction within the spawn range
     {
         xValue = Random.Range(minX, maxX);
         yValue = Random.Range(minY, maxY);
@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
         GameObject obj = prefab[Random.Range(0, prefab.Length)];
         return obj;
     }
-    private void SpawnEnemies()
+    private void SpawnEnemies()                                             //get enemy prefabs from object pool and activate them
     { 
         GameObject enemy = pool.GetPooledObject(GetRandomPrefab(enemyPrefab).tag);
         if (enemy != null)
@@ -42,7 +42,7 @@ public class EnemySpawner : MonoBehaviour
         }
         Invoke(nameof(SpawnEnemies), 2f);
     }
-    private void SpawnAsteroid()
+    private void SpawnAsteroid()                                           //get asteroid prefabs from object pool and activate them
     {
         GameObject obj = pool.GetPooledObject(GetRandomPrefab(asteroid).tag);
         if (obj != null)
@@ -56,7 +56,7 @@ public class EnemySpawner : MonoBehaviour
         Invoke(nameof(SpawnAsteroid), 5f);
     }
 
-    private void SpawnPowerUp()
+    private void SpawnPowerUp()                                            //get powerUp prefab from object pool and activate it
     {
         GameObject power = pool.GetPooledObject("PowerUp");
         if (power != null)
